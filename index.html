@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport"content="width=device-width, initial-scale=1.0"/>
+		<title>De magische bol</title>
+		<link rel="icon" href="magischebolicon.png"/>
+		<style type="text/css">
+		@import url('https://fonts.googleapis.com/css2?family=Elsie&display=swap');
+
+		body, html{
+			font-family: serif;
+			font-size: 0.9em;
+			height: 100%;
+			margin: 0;
+			overflow: hidden;
+			background-color: black;
+			color: white;
+			text-align: center;
+		}
+
+		h1{
+			font-family: 'Elsie', cursive;
+			margin-bottom: 15px;
+		}
+
+		p{
+			margin: 0;	
+			font-size: 1em;
+		}
+
+		div#content{
+			width: 60%;
+			margin-left: auto;
+			margin-right: auto;
+		}
+
+		img{
+			position: absolute;
+			top: 50%;
+			left: 50%;
+			transform: translate(-50%, -35%);
+			object-fit: contain;
+			width: 80%;
+			height: 100%;
+		}
+
+		span#fortuneTekst{
+			position: absolute;
+			top: 50%;
+			left: 50%;
+			transform: translate(-50%, 20%);
+			text-align: center;
+			font-family: 'Elsie', cursive;
+			font-size: 6em;
+			opacity:0;
+			transition:2s;
+		}
+
+		@media only screen and (min-width: 1011px){
+			div#content{
+				width: 70%;
+			}
+
+			body, html{
+				font-size: 1em;
+			}
+
+			p{	
+				font-size: 0.9em;
+			}
+
+			img{
+				transform: translate(-50%, -40%);
+				width: 80%;
+			}
+
+			span#fortuneTekst{
+				transform: translate(-50%, -35%);
+			}
+
+		}
+
+		@media only screen and (max-width: 400px){
+			div#content{
+				width: 95%;
+			}
+
+			span#fortuneTekst{
+				transform: translate(-50%, 50%);
+			}
+
+			img{
+				width: 100%;
+			}
+		}
+
+		</style>
+		<script type="text/javascript">
+		function toonFortune(){
+
+			var fortune = [
+				'Ja',
+				'Nee'
+			];
+			
+			fortuneTekst.innerHTML=fortune[Math.floor(Math.random()*fortune.length)];
+
+			document.getElementById("fortuneTekst").style.opacity = 1;
+			return fortune
+		}
+
+		function disableInteraction(){
+			document.getElementById("all").style.pointerEvents="auto";
+		}
+
+		function playAudio(){
+			document.getElementById("audio").load();
+			document.getElementById("audio").play();
+		}
+
+		function playAnimation(){
+			document.getElementById("image").src="magischebol.gif";
+		}
+
+		window.onload=function(){
+			document.getElementById("all").onclick=function(){
+
+				document.getElementById("all").style.pointerEvents="none";
+
+				fortuneTekst.innerHTML="";
+				document.getElementById("fortuneTekst").style.opacity = 0;
+
+				setTimeout(toonFortune,4000);
+				setTimeout(disableInteraction,7000);
+				playAudio(this);
+				playAnimation(this);
+			}	
+		}
+
+		</script>
+	</head>
+	<body id="all">
+		<div id="content">
+			<div id="text">
+				<audio id="audio">
+				<source src="windchimes.mp3" type="audio/mp3">
+				</audio> 
+				<h1>Stel je vraag aan het universum en de magische bol zal antwoord geven*</h1>
+				<p>*Omdat het universum zich moet verlagen naar een voor ons als simpele wezens enigszins begrijpbaar niveau, is het om miscommunicatie te voorkomen alleen mogelijk om antwoord te krijgen op ja of nee vragen</p>
+			</div>
+			<div id="magie">
+				<img src="magischebol.png">
+				<img id="image" src="magischebol.png">
+				<span id="fortuneTekst"></span>
+			</div>
+		</div>
+	</body>
+</html>
